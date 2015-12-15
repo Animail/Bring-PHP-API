@@ -1,8 +1,6 @@
 # Bring PHP API
 
-This PHP wrapper is not supported by Bring, but as of the time of writing they do not offer a PHP alternative. Based on the [developer documentation](http://developer.bring.com/).
-
-**Please note that this package is dysfunctional as of this moment.**
+This PHP wrapper is not supported by Bring, but as of Dec 2015 they do not offer a PHP alternative. Based on the [developer documentation](http://developer.bring.com/).
 
 # Installing
 
@@ -36,13 +34,13 @@ The `track()` method wraps the [Tracking API](http://developer.bring.com/api/tra
 ```php
 
 // Shipment number
-$consignmentSet = $bring->track('73325389952521130'); // array()
+$consignmentSet = $bring->track('73325389952521130'); // array('consignmentSet' => array())
 
 // Package number
-$consignmentSet = $bring->track('CT797294851NO'); // array()
+$consignmentSet = $bring->track('CT797294851NO'); // array('consignmentSet' => array())
 
 // Reference (this is usually your internal ordernumber or shipmentID)
-$consignmentSet = $bring->track('1234'); // array()
+$consignmentSet = $bring->track('1234'); // array('consignmentSet' => array())
 
 ```
 
