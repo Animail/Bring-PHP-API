@@ -29,7 +29,7 @@ $bring->setClientUrl('https://example.com/');
 
 ### Find shipment by reference, package number or shipment number
 
-The `track()` method always returns an array, including when the shipment(s) could not be found. Unless there was an API error, in which case we'll throw all kinds of fun `\Animail\BringApiException`s.
+The `track()` method wraps the [Tracking API](http://developer.bring.com/api/tracking/) and always returns an array, including when the shipment(s) could not be found. Unless there was an API error, in which case we'll throw all kinds of fun `\Animail\BringApiException`s.
 
 ```php
 
