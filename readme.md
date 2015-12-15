@@ -21,10 +21,10 @@ use \Animail\BringApi;
 
 // ...
 
-$bring = new BringApi;
-$bring->setUid('john.doe@example.com');
-$bring->setKey('1234abc-abcd-1234-5678-abcd1234abcd');
-$bring->setClientUrl('https://example.com/');
+$api_uid = 'john.doe@example.com';
+$api_key = '1234abc-abcd-1234-5678-abcd1234abcd';
+$my_website_url = 'https://example.com/';
+$bring = new BringApi($api_uid, $api_key, $my_website_url);
 ```
 
 ### Find shipment by reference, package number or shipment number

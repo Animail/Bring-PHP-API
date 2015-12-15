@@ -1,6 +1,9 @@
 <?php
 namespace Animail;
 
+use \GuzzleHttp\Client;
+use \GuzzleHttp\Exception\RequestException;
+
 class BringApi
 {
   protected $guzzle;
@@ -8,22 +11,10 @@ class BringApi
   protected $key;
   protected $clientUrl;
 
-  /**
-   * Setters
-   */
-
-  public function setUid($uid)
+  public function __construct($uid, $key, $clientUrl)
   {
     $this->uid = $uid;
-  }
-
-  public function setKey($key)
-  {
     $this->key = $key;
-  }
-
-  public function setClientUrl($clientUrl)
-  {
     $this->clientUrl = $clientUrl;
   }
 
@@ -52,7 +43,36 @@ class BringApi
 
   public function track($query)
   {
+    // Call the API.
+    try {
+      $results = $this->guzzle()->get('/tracking.json', ['query' => ['q' => $query]]);
+    } catch (\Exception $e) {
+      throw new BringApiException($e->getMessage(), $e->getCode(), $e);
+    }
+
     // Wasn't kidding about always returning an array.
     return array();
+  }
+
+  /**
+   * Low-level internal methods
+   */
+
+  protected function guzzle()
+  {
+    if(is_null($this->guzzle))
+    {
+      $this->guzzle = new Client([
+        'base_url' => 'https://tracking.bring.com',
+        'defaults' => [
+          'headers' => [
+            'X-MyBring-API-Uid' => $this->uid,
+            'X-MyBring-API-Key' => $this->key,
+            'X-Bring-Client-URL' => $this->clientUrl
+          ]
+        ]
+      ]);
+    }
+    return $this->guzzle;
   }
 }
