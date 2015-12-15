@@ -49,7 +49,7 @@ class BringApi
       $response = $this->guzzle()->get('/tracking.json', ['query' => ['q' => $query]]);
       if ($body = $response->getBody()) {
         // Body is actually a stream but its ok because json_decode casts it to string
-        $json = json_decode($body);
+        $json = json_decode($body, TRUE);
         return $json;
       }
       else
