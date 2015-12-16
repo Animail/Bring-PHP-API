@@ -25,6 +25,9 @@ $api_uid = 'john.doe@example.com';
 $api_key = '1234abc-abcd-1234-5678-abcd1234abcd';
 $my_website_url = 'https://example.com/';
 $bring = new BringApi($api_uid, $api_key, $my_website_url);
+
+// Don't want to authenticate?
+$bring = new BringApi();
 ```
 
 ### Find shipment by reference, package number or shipment number

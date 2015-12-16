@@ -11,7 +11,7 @@ class BringApi
   protected $key;
   protected $clientUrl;
 
-  public function __construct($uid, $key, $clientUrl)
+  public function __construct($uid = '', $key = '', $clientUrl = '')
   {
     $this->uid = $uid;
     $this->key = $key;
