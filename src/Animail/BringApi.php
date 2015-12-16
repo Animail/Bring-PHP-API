@@ -50,14 +50,29 @@ class BringApi
       if ($body = $response->getBody()) {
         // Body is actually a stream but its ok because json_decode casts it to string
         $json = json_decode($body, TRUE);
-        return $json;
+
+        // consignmentSet is always set, but the first entry might tell us about an error. (404, usually.)
+        if(isset($json['consignmentSet'][0]) && isset($json['consignmentSet'][0]['error']))
+        {
+          // We promised to always return an array, so we'll deal with
+          // 404 messages ourselves but throw exceptions for other ones.
+          if($json['consignmentSet'][0]['error']['code'])
+          {
+            throw new BringApiErrorException($json['consignmentSet'][0]['error']['message'], $json['consignmentSet'][0]['error']['code']);
+          }
+          // No "else" because this trickles down to the default return value at the end of the method.
+        }
+        else
+        {
+          return $json;
+        }
       }
       else
       {
-        throw new BringApiException('Could not load response body');
+        throw new BringApiClientException('Could not load response body', 500);
       }
     } catch (\Exception $e) {
-      throw new BringApiException($e->getMessage(), $e->getCode(), $e);
+      throw new BringApiClientException($e->getMessage(), $e->getCode(), $e);
     }
 
     // Wasn't kidding about always returning an array.
