@@ -49,7 +49,7 @@ $consignmentSet = $bring->track('1234'); // array('consignmentSet' => array())
 
 ### Catching exceptions
 
-** Catch everything in the same place **
+**Catch everything in the same place**
 ```php
 try {
   $bring = new BringApi('', '', '');
@@ -58,7 +58,7 @@ try {
 }
 ```
 
-** Only catch errors from the API **
+**Only catch errors from the API**
 ```php
 try {
   $bring = new BringApi('', '', '');
@@ -68,7 +68,7 @@ try {
 }
 ```
 
-** Separate handlers for different types **
+**Separate handlers for different types**
 ```php
 try {
   $bring = new BringApi('', '', '');
